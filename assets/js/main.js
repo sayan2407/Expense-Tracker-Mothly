@@ -94,6 +94,10 @@ addExpense = (date, amount, category_id) => {
     saveExpenses(expenses);
     createMonthOptions();
     renderPieChart( monthKey );
+    // let yeardate = monthKey.split()
+    console.log("val=>", getMonthNameFromNumber( monthKey.split("-")[0], monthKey.split("-")[1] ) );
+    
+    document.getElementById("exp-month-select").value = getMonthNameFromNumber( monthKey.split("-")[0], monthKey.split("-")[1] );
 
     // console.log("Updated Expenses:", expenses);
     window.alert("Expense Added Successfully!");
