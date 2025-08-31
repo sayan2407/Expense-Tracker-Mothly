@@ -102,6 +102,39 @@ addExpenseBtn.addEventListener("click", () => {
 
 
 })
+ getMonthNameFromNumber = (year, monthNumber) => {
+    // monthNumber = 1–12 (Jan = 1, Dec = 12)
+    const date = new Date(year, monthNumber - 1); // JS month index 0–11
+    return date.toLocaleString("default", { month: "long" });
+}
+
+createMonthOptions = () => {
+    const expenses = fetchExpenses();
+    // console.log(expenses);
+    const months = Object.keys(expenses);
+
+    const monthSelect = document.getElementById("exp-month-select");
+
+    if ( !months.length ) {
+        const optionEle = document.createElement("option");
+        optionEle.value = "NA";
+        optionEle.textContent = "No Data";
+        monthSelect.appendChild(optionEle);
+    }
+    months.forEach(month => {
+        const yearMonth = month.split("-");
+        const monthName = getMonthNameFromNumber(yearMonth[0], yearMonth[1]);
+        const optionEle = document.createElement("option");
+        optionEle.value = monthName;
+        optionEle.textContent = monthName;
+        monthSelect.appendChild(optionEle);
+
+    })
+    
+
+}
+createMonthOptions();
+
 
 fetchAllExpenses = () => {
     const expenses = fetchExpenses();
