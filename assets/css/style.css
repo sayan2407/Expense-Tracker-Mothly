@@ -1,0 +1,87 @@
+/* Reset some default styles */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f9;
+  color: #333;
+}
+
+/* Main container */
+div {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Headings */
+h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #7f8c8d;
+}
+
+/* Card-style sections */
+div > div {
+  background: #fff;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Inputs and buttons */
+input, select, button {
+  margin: 8px 0;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+input:focus, select:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 4px rgba(52, 152, 219, 0.4);
+}
+
+button {
+  background: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+/* Section headings */
+h3 {
+  margin-top: 0;
+  color: #34495e;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 5px;
+}
+
+/* Chart container */
+#exp-view-expenses {
+  text-align: center;
+}
+
+#exp-view-expenses select {
+  margin-bottom: 15px;
+}
+
+/* Make chart responsive */
+#exp-chart {
+  width: 100% !important;
+  height: 400px !important;
+}

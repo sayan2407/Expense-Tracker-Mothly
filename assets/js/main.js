@@ -7,6 +7,8 @@ addCategoryBtn.addEventListener("click", () => {
     // console.log("Test", category);
     addCategory(category.value);
     category.value = "";
+    createCategoryOptions();
+    window.alert("category added successfully!");
 
 
 })
@@ -37,6 +39,7 @@ fetchCategories = () => {
 createCategoryOptions = () => {
     const allCategory = fetchCategories();
     const selectEle = document.getElementById("exp-sel-category");
+    selectEle.innerHTML = "";
 
     allCategory.forEach(item => {
         const optionEle = document.createElement("option");
@@ -82,6 +85,8 @@ addExpense = (date, amount, category_id) => {
     expenses[monthKey][category_id] += parseFloat(amount);
 
     saveExpenses(expenses);
+    createMonthOptions();
+
     // console.log("Updated Expenses:", expenses);
     window.alert("Expense Added Successfully!");
 
@@ -114,6 +119,7 @@ createMonthOptions = () => {
     const months = Object.keys(expenses);
 
     const monthSelect = document.getElementById("exp-month-select");
+    monthSelect.innerHTML = "";
 
     if ( !months.length ) {
         const optionEle = document.createElement("option");
@@ -139,5 +145,84 @@ createMonthOptions();
 fetchAllExpenses = () => {
     const expenses = fetchExpenses();
 }
+// Chart Related code 
+const monthSelect = document.getElementById("exp-month-select");
+const ctx = document.getElementById("exp-chart").getContext("2d");
+let expenseChart = null;
+
+
+// Utility: random color generator
+getRandomColors = (count) => {
+    return Array.from({ length: count }, () =>
+        `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`
+    );
+}
+
+// Render chart for a given month
+renderPieChart = (monthKey)  => {
+    const expenses = fetchExpenses();
+    if (!expenses[monthKey]) return;
+
+    const categories = Object.keys(expenses[monthKey]);
+    const amounts = Object.values(expenses[monthKey]);
+
+    // Destroy old chart if exists
+    if (expenseChart) {
+        expenseChart.destroy();
+    }
+
+    expenseChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: categories.map(catId => {
+                const catObj = fetchCategories().find(c => c.id == catId);
+                return catObj ? catObj.category : `Category ${catId}`;
+            }),
+            datasets: [{
+                data: amounts,
+                backgroundColor: getRandomColors(categories.length)
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: `Expenses for ${monthKey}`,
+                    font: { size: 18 }
+                },
+                datalabels: {
+                     font: {
+                        size: 14,
+                        weight: "bold"
+                    }
+                }
+            }
+        }
+    });
+}
+
+// When month dropdown changes → update chart
+monthSelect.addEventListener("change", (e) => {
+    const selectedMonth = e.target.value;
+    const expenses = fetchExpenses();
+
+    const monthKey = Object.keys(expenses).find(key => {
+        const [year, monthNum] = key.split("-");
+        return getMonthNameFromNumber(year, monthNum) === selectedMonth;
+    });
+
+    if (monthKey) renderPieChart(monthKey);
+});
+
+// On first load → show first month’s chart (if exists)
+(function initChart() {
+    const expenses = fetchExpenses();
+    const months = Object.keys(expenses);
+    if (months.length) {
+        renderPieChart(months[0]);
+    }
+})();
+
 
 

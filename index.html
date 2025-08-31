@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="assets/css/style.css">
 
-    </head>
-    <body>
+<head>
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+    <div>
+        <h2> Expenses Tracker </h2>
+        <p>Personal use</p>
+
         <div>
-            <h2> Expenses Tracker </h2>
-            <p>Personal use</p>
+            <h3>Add category</h3>
+            <input type="text" placeholder="add categories" id="exp-category">
+            <button id="exp-add-category">Add Category</button>
+        </div>
+        <div>
+            <h3>Add Expenses</h3>
+            <label for="exp-date">Select Date</label>
+            <input type="date" id="exp-date" /><br />
 
-            <div>
-                <h3>Add category</h3>
-                <input type="text" placeholder="add categories" id="exp-category">
-                <button id="exp-add-category">Add Category</button>
-            </div>
-            <div>
-                <h3>Add Expenses</h3>
-                <label for="exp-date">Select Date</label>
-                <input type="date" id="exp-date"/><br/>
+            <label>Enter amount</label>
+            <input type="number" placeholder="Enter amount" id="exp-expense" /><br />
 
-                <label>Enter amount</label>
-                <input type="number" placeholder="Enter amount" id="exp-expense" /><br/>
+            <label>Select category</label>
+            <select id="exp-sel-category">
 
-                <label>Select category</label>
-                <select id="exp-sel-category">
+            </select><br />
+            <button id="exp-add-expense">Add Expense</button>
+        </div>
+        <div>
+            <h3> All Expenses month wise </h3>
+            <div id="exp-view-expenses" style="max-width: 500px; margin: auto;">
+                <select id="exp-month-select"></select>
+                <canvas id="exp-chart" width="400" height="400"></canvas>
 
-                </select><br/>
-                <button id="exp-add-expense">Add Expense</button>
-            </div>
-            <div>
-                <h3> All Expenses month wise </h3>
-                <div id="exp-view-expenses">
-                    <select id="exp-month-select"></select>
-                </div>
             </div>
         </div>
+    </div>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
 
-        <script src="assets/js/main.js"></script>
-    </body>
 </html>
