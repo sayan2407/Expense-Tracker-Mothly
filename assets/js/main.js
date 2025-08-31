@@ -234,5 +234,30 @@ monthSelect.addEventListener("change", (e) => {
     }
 })();
 
+document.getElementById("exp-deleteMonthBtn").addEventListener("click", function() {
+    const monthKey = getMonthKey(  document.getElementById("exp-date-del").value );
+    console.log(monthKey)
+    if (!monthKey) {
+        alert("Please select a month first!");
+        return;
+    }
+
+    let expenses = fetchExpenses();
+
+    if ( expenses[monthKey] ) {
+        delete expenses[monthKey];
+        saveExpenses(expenses);
+        location.reload();
+    } else {
+        window.alert( "This month is not added" );
+    }
+
+    
+
+
+    
+});
+
+
 
 
