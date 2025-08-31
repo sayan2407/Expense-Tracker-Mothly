@@ -41,6 +41,13 @@ createCategoryOptions = () => {
     const selectEle = document.getElementById("exp-sel-category");
     selectEle.innerHTML = "";
 
+    if ( !allCategory.length ) {
+        const optionEle = document.createElement("option");
+        optionEle.value = "NA";
+        optionEle.textContent = "Please add category";
+        selectEle.appendChild(optionEle)
+    }
+
     allCategory.forEach(item => {
         const optionEle = document.createElement("option");
         optionEle.value = item.id;
