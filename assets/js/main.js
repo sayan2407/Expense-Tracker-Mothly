@@ -93,6 +93,7 @@ addExpense = (date, amount, category_id) => {
 
     saveExpenses(expenses);
     createMonthOptions();
+    renderPieChart( monthKey );
 
     // console.log("Updated Expenses:", expenses);
     window.alert("Expense Added Successfully!");
@@ -167,6 +168,8 @@ getRandomColors = (count) => {
 
 // Render chart for a given month
 renderPieChart = (monthKey)  => {
+    console.log(monthKey);
+    
     const expenses = fetchExpenses();
     if (!expenses[monthKey]) return;
 
